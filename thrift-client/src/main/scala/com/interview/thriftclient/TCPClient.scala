@@ -14,11 +14,14 @@ import com.typesafe.scalalogging.LazyLogging
 import scala.util.Random
 
 object TCPClient {
+  case class GenerateLog()
+
   class TCPClientConnectionManager(host: String, port: Int) extends Actor with LazyLogging{
     import context.system
     val date = new Date()
     val randomGenerator = new Random(date.getTime)
     IO(Tcp) ! Connect(new InetSocketAddress(host, port))
+    var handler: ActorRef = _
 
     def receive: Receive = {
       case CommandFailed(_: Connect) =>
@@ -28,14 +31,18 @@ object TCPClient {
         //listener ! connected
         logger.info("Connected to remote server")
         val connection = sender()
-        val handler = context.actorOf(Props(classOf[TCPClientHandler], connection))
+        handler = context.actorOf(Props(classOf[TCPClientHandler], connection))
         connection ! Register(handler)
-        handler ! ThriftProtocolHandler.serialize(
-          new Operation(
-            OperationType.INSERT,
-            new MyLogEvent(1, date.getTime, randomGenerator.alphanumeric.take(50).mkString)
-          )
-        ).get
+      case _: GenerateLog =>
+        logger.info("Got Generate new logs")
+        for(i <- 1 to 15) {
+          handler ! ThriftProtocolHandler.serialize(
+            new Operation(
+              OperationType.INSERT,
+              new MyLogEvent(1, date.getTime, randomGenerator.alphanumeric.take(50).mkString)
+            )
+          ).get
+        }
     }
   }
 
