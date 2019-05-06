@@ -2,9 +2,9 @@
 kafka 2.2.0 for Scala 2.11--> https://www.apache.org/dyn/closer.cgi?path=/kafka/2.2.0/kafka_2.11-2.2.0.tgz
 Cassandra 3.11.4 --> http://cassandra.apache.org/download/
 cqlsh 5.0.1
-maven 3.6.0 --> 
+maven 3.6.0 --> https://maven.apache.org/install.html
 java 1.8.0_212 - java-8-openjdk-amd64
-Thrift version 0.9.1
+Thrift version 0.9.1  --> https://thrift.apache.org/docs/install/
 Scala 2.11.8
 
 
@@ -31,3 +31,6 @@ tail -f thrift-client.log
 To generate more log messages you can run 
 touch generate_random_logs.tmp
 while the project modules are runnning
+
+-----TIME SPENT-----
+Around 12 Hours of pure coding
