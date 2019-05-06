@@ -53,10 +53,11 @@ if [ "$build" -eq "1" ]; then
 fi
 
 if [ "$run" -eq "1" ]; then
-	touch ~/generate_random_logs.tmp
-	$KAFKA_HOME/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic LogEventsTopic
-	cqlsh -f common/src/main/resources/schema.cql
-	echo "Sleeping for 5 seconds" && sleep 5
+    mkdir logs
+    touch ~/generate_random_logs.tmp
+    $KAFKA_HOME/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic LogEventsTopic
+    cqlsh -f common/src/main/resources/schema.cql
+    echo "Sleeping for 5 seconds" && sleep 5
     java -classpath bin/thrift-server-1.0-SNAPSHOT-jar-with-dependencies.jar com.interview.thriftserver.ThriftServerApp &> logs/thrift-server.log &
     echo "$!" > thriftserver.pid
     echo 'Sleeping for 5 seconds' && sleep 5
