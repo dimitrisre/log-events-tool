@@ -14,8 +14,8 @@ To install apache Cassandra follow the first section of instructions for Debian 
 To install maven3 follow these instructions https://maven.apache.org/install.html
 To install thrift follow these instructions https://thrift.apache.org/docs/install/ (In a Debian environment just sudo apt install thrift-compiler)
 
-PROS: 1. you have to have a working instance of cassandra database
-      2. you have to have working instances of zookeeper and kafka 
+PROS: 1. you have to have a running instance of cassandra database
+      2. you have to have running instances of zookeeper and kafka 
 
 1. Clone the git repository from https://github.com/dimitrisre/log-events-tool.git
 2. Change directory to log-events-tool
@@ -29,7 +29,7 @@ tail -f thrift-server.log
 tail -f thrift-client.log
 
 To generate more log messages you can run 
-touch generate_random_logs.tmp
+touch generate_random_logs.tmp for bash 
 while the project modules are runnning
 
 -----TIME SPENT-----

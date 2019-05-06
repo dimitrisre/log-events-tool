@@ -39,7 +39,7 @@ object TCPClient {
           handler ! ThriftProtocolHandler.serialize(
             new Operation(
               OperationType.INSERT,
-              new MyLogEvent(1, date.getTime, randomGenerator.alphanumeric.take(50).mkString)
+              new MyLogEvent(1, {new Date()}.getTime, randomGenerator.alphanumeric.take(50).mkString)
             )
           ).get
         }
